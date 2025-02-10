@@ -1,28 +1,21 @@
 pipeline {
 	agent any
-	
-	environment {
-		JAVA_HOME = tool 'JDK17'
-		PATH = "$JAVA_HOME/bin:$PATH"
-	}
-	
 	stages {
-		stage ('clone repository') {
+		stage ('Clone Repository') {
 			steps {
-				git branch: 'master', url: 'https://github.com/hellboy17/devopsLearnings.git'
+				git branch: 'jenkinsShell' url: 'https://github.com/hellboy17/devopsLearnings.git'
 			}
 		}
-		
-		stage ('Build') {
+		stage ('Run Shell commands') {
 			steps {
-				bat 'mvn install'
+				sh 'echo "Hello WOrld"'
+				sh 'ls -l'
 			}
 		}
 	}
-	
 	post {
 		success {
-			echo 'Build completed'
+			echo 'Build complete'
 		}
 		failure {
 			echo 'Build Failed'
