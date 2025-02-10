@@ -2,7 +2,7 @@ pipeline {
 	agent any
 	
 	environment {
-		JAVA_HOME = tool 'JDK11'
+		JAVA_HOME = tool 'JDK17'
 		PATH = "$JAVA_HOME/bin:$PATH"
 	}
 	
