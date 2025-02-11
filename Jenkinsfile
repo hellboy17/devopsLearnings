@@ -1,24 +1,28 @@
 pipeline {
 	agent any
 	stages {
-		stage ('Clone Repository') {
+		stage ("Checkout") {
+			git branch: 'jenkinsNodeJS', url: 'https://github.com/hellboy17/devopsLearnings.git'
+		}
+
+		stage ("Install Dependencies") {
 			steps {
-				git branch: 'jenkinsShell', url: 'https://github.com/hellboy17/devopsLearnings.git'
+				sh 'npm install'
 			}
 		}
-		stage ('Run Shell commands') {
+
+		stage ('Run Tests') {
 			steps {
-				sh 'echo "Hello WOrld"'
-				sh 'ls -l'
+				sh 'npm test'
 			}
 		}
 	}
 	post {
 		success {
-			echo 'Build complete'
+			echo 'Success'
 		}
 		failure {
-			echo 'Build Failed'
+			echo 'Failure'
 		}
 	}
 }
