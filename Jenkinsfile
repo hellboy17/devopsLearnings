@@ -2,7 +2,9 @@ pipeline {
 	agent any
 	stages {
 		stage ("Checkout") {
-			git branch: 'jenkinsNodeJS', url: 'https://github.com/hellboy17/devopsLearnings.git'
+			steps {
+				git branch: 'jenkinsNodeJS', url: 'https://github.com/hellboy17/devopsLearnings.git'
+			}
 		}
 
 		stage ("Install Dependencies") {
