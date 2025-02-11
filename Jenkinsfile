@@ -13,9 +13,10 @@ pipeline {
 			}
 		}
 
-		stage ('Run Tests') {
+		stage ('Pakage and Archive') {
 			steps {
-				sh 'npm test'
+				sh 'zip -r myapp.zip . -x "node_modules/*" ".git/*" ".github/*" "*.env"'
+				archiveArtifacts artifacts: 'myapp.zip', fingerprint: true
 			}
 		}
 	}
