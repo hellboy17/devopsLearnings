@@ -9,13 +9,13 @@ pipeline {
 
 		stage ("Install Dependencies") {
 			steps {
-				sh 'npm install'
+				sh 'wsl -- npm install'
 			}
 		}
 
 		stage ('Pakage and Archive') {
 			steps {
-				sh 'zip -r myapp.zip . -x "node_modules/*" ".git/*" ".github/*" "*.env"'
+				sh 'wsl -- zip -r myapp.zip . -x "node_modules/*" ".git/*" ".github/*" "*.env"'
 				archiveArtifacts artifacts: 'myapp.zip', fingerprint: true
 			}
 		}
