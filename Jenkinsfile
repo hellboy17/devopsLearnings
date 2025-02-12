@@ -9,13 +9,13 @@ pipeline {
 
 		stage ("Install Dependencies") {
 			steps {
-				sh 'wsl -- bash -c "npm install"'
+				powershell 'npm install'
 			}
 		}
 
 		stage ('Pakage and Archive') {
 			steps {
-				sh 'wsl -- bash -c "zip -r myapp.zip . -x \'node_modules/*\' \'.git/*\' \'.github/*\' \'*.env\' \'.gitignore\' \'*.log\' \'.DS_Store\'"'
+				powershell 'Compress-Archive -Path * -DestinationPath myapp.zip -Force -Exclude node_modules, .git, .github, *.env, .gitignore, *.log, .DS_Store'
 				archiveArtifacts artifacts: 'myapp.zip', fingerprint: true
 			}
 		}
