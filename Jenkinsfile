@@ -15,7 +15,8 @@ pipeline {
 
 		stage ('Pakage and Archive') {
 			steps {
-				powershell 'Compress-Archive -Path * -DestinationPath myapp.zip -Force -Exclude node_modules, .git, .github, *.env, .gitignore, *.log, .DS_Store'
+				$7zPath = "C:\Program Files\7-Zip\7z.exe"
+				powershell '& $7zPath a -r myapp.zip * -x!node_modules -x!.git -x!.github -x!*.env'
 				archiveArtifacts artifacts: 'myapp.zip', fingerprint: true
 			}
 		}
