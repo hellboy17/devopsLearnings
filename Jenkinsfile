@@ -3,6 +3,7 @@ pipeline {
 	environment {
 		AWS_REGION = "us-east-1"
 		S3_BUCKET = "test-bucket-1213124124124124142"
+		FILE_NAME = "myapp.zip"
 	}
 	stages {
 		stage ("Checkout") {
@@ -32,7 +33,8 @@ pipeline {
 				powershell '''
                 		Write-Host "Deploying to AWS S3"
                 		Write-Host "Using AWS Region: $env:AWS_REGION"
-		                aws s3 sync ./dist s3://$env:S3_BUCKET --region $env:AWS_REGION
+		  		$filePath = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\jenkinsNodejsBuild\\$env:FILE_NAME"
+		                aws s3 cp $filePath s3://$env:S3_BUCKET//$env:FILE_NAME --region $env:AWS_REGION
                 		'''
 			}
 		}
