@@ -17,7 +17,7 @@ pipeline {
 			steps {
 				powershell '''
 				$7zPath = "$Env:ProgramFiles\\7-Zip\\7z.exe"
-				& $7zPath a -r myapp.zip * -x!node_modules -x!.git -x!.github -x!*.env'
+				& "$7zPath" a -r "myapp.zip" "." "-x!node_modules" "-x!.git" "-x!.github" "-x!*.env"
 				'''
 				archiveArtifacts artifacts: 'myapp.zip', fingerprint: true
 			}
