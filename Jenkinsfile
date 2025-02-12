@@ -29,7 +29,7 @@ pipeline {
 
 		stage ('upload to s3') {
 			steps {
-				powershell "aws s3 sync ./dist s3://$env:S3_BUCKET --region $env:AWS_REGION"
+				sh "aws s3 sync ./dist s3://$env:S3_BUCKET --region $env:AWS_REGION"
 			}
 		}
 	}
