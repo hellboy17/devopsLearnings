@@ -6,18 +6,24 @@ pipeline {
 	}
 	stages {
 		stage ("Checkout Lambda Code") {
-			git branch: 'jenkinsLambda', url: 'https://github.com/hellboy17/devopsLearnings.git'
+			steps {
+				git branch: 'jenkinsLambda', url: 'https://github.com/hellboy17/devopsLearnings.git'
+			}
 		}
 
 		stage ("Package Lambda") {
-			powershell '''
-			cd $Env:WORKSPACE
-			Compress-Archive -Path * -DestinationPath lambda_function.zip -Force
-			'''
+			steps {
+				powershell '''
+				cd $Env:WORKSPACE
+				Compress-Archive -Path * -DestinationPath lambda_function.zip -Force
+				'''
+			}
 		}
 
 		stage ("Deploy to AWS") {
-			powershell 'aws lambda update-function-code --function-name $Env:LAMBDA_FUNCTION_NAME --zip-file fileb://lambda_function.zip --region $Env:AWS_REGION'
+			steps {
+				powershell 'aws lambda update-function-code --function-name $Env:LAMBDA_FUNCTION_NAME --zip-file fileb://lambda_function.zip --region $Env:AWS_REGION'
+			}
 		}
 	}
 	post {
