@@ -1,1 +1,20 @@
-/target/
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# Crash logs
+crash.log
+
+# Ignore Terraform configuration cache
+.terraform/
+.terraform.lock.hcl
+
+# Ignore override files (used for local customizations)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore any generated files
+*.tfvars
+*.tfvars.json
